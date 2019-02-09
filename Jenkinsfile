@@ -1,4 +1,4 @@
-node {
+node('s1') {
     properties([parameters([string(defaultValue: 'ronaldo', description: '', name: 'name', trim: false)])])
    def mvnHome
    stage('Preparation') { // for display purposes
