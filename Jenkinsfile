@@ -18,6 +18,7 @@ node('Saitama') {
        sh 'bin/makeindex'
    }
    stage('Results') {
-      archiveArtifacts 'index.jsp' , fingerprint: true
+      archiveArtifacts 'index.jsp'
+      fingerprint 'index.jsp'
    }
 }
