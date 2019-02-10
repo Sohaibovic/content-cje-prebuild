@@ -1,12 +1,17 @@
-node('Saitama') {
-    properties([parameters([string(defaultValue: 'ronaldo', description: '', name: 'name', trim: false)])])
+node ('Saitama')
+{
+   properties([parameters([string(defaultValue: 'ronaldo', description: '', name: 'name', trim: false)])])
    def mvnHome
-   stage('Preparation') { // for display purposes
+
+   stage('Preparation') 
+   {
      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/linuxacademy/content-cje-prebuild.git']]])
            
       mvnHome = tool 'M3'
    }
-   stage('Build') {
+
+   stage('Build') 
+   {
       // Run the maven build
       if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
@@ -14,10 +19,14 @@ node('Saitama') {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
    }
-   stage('Post Job'){
+
+   stage('Post Job')
+   {
        sh 'bin/makeindex'
    }
-   stage('Results') {
+
+   stage('Results') 
+   {
       archiveArtifacts 'index.jsp'
       fingerprint 'index.jsp'
    }
