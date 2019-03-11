@@ -1,4 +1,4 @@
-node ('Saitama')
+node ('slave-zzidane')
 {
    properties([parameters([string(defaultValue: 'ronaldo', description: '', name: 'name', trim: false)])])
    def mvnHome
@@ -7,7 +7,7 @@ node ('Saitama')
    {
      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Sohaibovic/content-cje-prebuild.git']]])
            
-      mvnHome = tool 'M3'
+      mvnHome = tool 'MVN325'
    }
 
    stage('Build') 
